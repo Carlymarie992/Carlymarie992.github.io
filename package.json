@@ -1,7 +1,7 @@
 {
   "name": "carly-3d-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,13 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/drei": "^9.0.0",
-    "@react-three/fiber": "^8.0.0",
+    "@react-three/drei": "^9.88.0",
+    "@react-three/fiber": "^8.15.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "three": "^0.150.0"
+    "three": "^0.158.0",
+    "gsap": "^3.12.2"
   },
   "devDependencies": {
-    "vite": "^4.0.0"
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.2.0"
   }
 }
