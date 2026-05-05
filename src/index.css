@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+body { margin: 0; font-family: 'Roboto Mono', monospace; background: #1a0a1a; overflow: hidden; }
+
+.hud-layer {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 10; padding: 40px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+
+.gold-badge {
+  border: 1px solid #b8860b; color: #b8860b; padding: 5px 15px;
+  display: inline-block; font-weight: bold; text-transform: uppercase;
+}
+
+.lavender-text { color: #b088e0; }

@@ -1,37 +1,41 @@
-import { ScrollControls, Scroll, Stars, Float, Text } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
+import { useScroll, Stars, Float, Text } from '@react-three/drei'
 import * as THREE from 'three'
+import { projects } from '../data/projects'
 
 export default function Scene() {
+  const scroll = useScroll()
+  const group = useRef()
+
+  useFrame((state) => {
+    // The "Rollercoaster" logic: move the camera as you scroll
+    const offset = scroll.offset
+    group.current.position.y = offset * 25
+  })
+
   return (
-    <>
-      <color attach="background" args={['#1a0a1a']} /> {/* Deep Eggplant */}
-      <ambientLight intensity={0.5} />
-    
-   <pointLight position={[10, 10, 10]} color="#40E0D0" /> {/* Turquoise Glow */}
+    <group ref={group}>
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade />
       
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-
-      <ScrollControls pages={3} damping={0.1}>
-        {/* ACT 1: THE INTAKE (Chaos) */}
-        <Scroll>
-           <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-              <mesh position={[0, 0, 0]}>
-                <dodecahedronGeometry args={[1, 0]} />
-                <meshStandardMaterial color="#b8860b" metalness={0.7} roughness={0.2} /> {/* Burnt Gold */}
-              </mesh>
-           </Float>
-        </Scroll>
-
-        {/* ACT 2: THE HUD (Hiring Manager Layer) */}
-        <Scroll html>
-          <div className="hud-container">
-            <h1 style={{ color: '#b088e0', margin: '20px' }}>CARLY MARIE</h1>
-            <div className="badge-gold">GPA 3.8 | DEAN'S LIST</div>
-          </div>
-        </Scroll>
-      </ScrollControls>
-    </>
+      {projects.map((p, i) => (
+        <Float key={i} position={[0, -i * 10, 0]} speed={2}>
+          {/* The Glass Prism (Eggplant/Lavender) */}
+          <mesh>
+            <boxGeometry args={[2.5, 3.5, 0.2]} />
+            <meshStandardMaterial color="#311131" transparent opacity={0.8} metalness={1} roughness={0} />
+            <Text position={[0, 0, 0.2]} fontSize={0.2} color="#b088e0" maxWidth={2} textAlign="center">
+              {p.title}
+            </Text>
+          </mesh>
+          
+          {/* The Burnt Gold Achievement Frame */}
+          <lineSegments>
+            <edgesGeometry args={[new THREE.BoxGeometry(2.5, 3.5, 0.2)]} />
+            <lineBasicMaterial color="#b8860b" />
+          </lineSegments>
+        </Float>
+      ))}
+    </group>
   )
 }
