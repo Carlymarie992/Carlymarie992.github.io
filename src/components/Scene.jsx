@@ -8,7 +8,8 @@ export default function Scene() {
     <>
       <color attach="background" args={['#1a0a1a']} /> {/* Deep Eggplant */}
       <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} color="#40E0D0" /> {/* Turquoise Glow */}
+    
+   <pointLight position={[10, 10, 10]} color="#40E0D0" /> {/* Turquoise Glow */}
       
       <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
 
